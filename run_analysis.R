@@ -1,5 +1,5 @@
 ##Read the data
-#setwd("F:/R/Coursera-JHU/3rd-Getting-And-Cleaning-Data/getdata-projectfiles")
+setwd("F:/R/Coursera-JHU/3rd-Getting-And-Cleaning-Data/getdata-projectfiles")
 library(data.table)
 library(dplyr)
 library(tidyr)
@@ -50,3 +50,15 @@ total_new1<-total_new %>%
         spread(var,mean)
 #write out the final tidy data
 write.table(total_new1,"final.text",row.name=FALSE)
+
+##another way to create a tidy dataset (setp5), don't need to narrow down the dataset
+total_new2<-total_pure %>%
+        select(-source)%>%
+        group_by(people,activity,add=TRUE) %>%
+        summarise_each(funs(mean)) 
+
+#the third way to create a tidy dataset (setp5), using data.table function as melt and dcast
+library(reshape2)
+total_pure1<-select(total_pure,-source)
+tidyset<-melt(total_pure1,id.vars=c("people","activity"))
+tidyset<-dcast(tidyset,people+activity~variable,mean)
