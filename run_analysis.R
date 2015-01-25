@@ -1,5 +1,5 @@
 ##Read the data
-setwd("F:/R/Coursera-JHU/3rd-Getting-And-Cleaning-Data/getdata-projectfiles")
+#setwd("F:/R/Coursera-JHU/3rd-Getting-And-Cleaning-Data/getdata-projectfiles")
 library(data.table)
 library(dplyr)
 library(tidyr)
